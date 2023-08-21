@@ -1,36 +1,44 @@
 package com.example.TillRecords.service;
 
 import com.example.TillRecords.model.Till;
+import com.example.TillRecords.repository.TillRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TillService {
 
-//    This service class will use a hardcoded array as temporary storage
+    @Autowired
+    private TillRepository tillRepository;
 
-    private List<Till> db = new ArrayList<>();
-
-    public List<Till> getDb() {
-        return db;
+    public TillRepository getTillRepository() {
+        return tillRepository;
     }
 
-    public void setDb(List<Till> db) {
-        this.db = db;
-    }
-
-    public TillService(List<Till> db) {
-        this.db = db;
+    public void setTillRepository(TillRepository tillRepository) {
+        this.tillRepository = tillRepository;
     }
 
     public TillService() {
     }
 
     public Till save(Till till) {
-        db.add(till);
+        tillRepository.save(till);
         return till;
     }
+
+    public Iterable<Till> findAll() {
+        return tillRepository.findAll();
+    }
+
+    public Optional<Till> findById(int id) {
+        return tillRepository.findById(id);
+    }
+
+
 
 }

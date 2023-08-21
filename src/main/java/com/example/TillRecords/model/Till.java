@@ -40,6 +40,11 @@ public class Till {
         System.out.println("overUnder: " + this.overUnder);
     }
 
+    public String createDate() {
+        LocalDateTime localDate = LocalDateTime.now();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        return localDate.format(dateTimeFormatter);
+    }
 
 
 //    Constructors
@@ -49,9 +54,7 @@ public class Till {
         this.coinsAndFivePounds = coinsAndFivePounds;
         this.remainingNotes = remainingNotes;
         this.overUnder = overUnder;
-        LocalDateTime localDate = LocalDateTime.now();
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        this.dateTime = localDate.format(dateTimeFormatter);
+        this.dateTime = createDate();
     }
 
     public Till() {
@@ -63,8 +66,8 @@ public class Till {
         return dateTime;
     }
 
-    public void setDateTime(String dateTime) {
-        this.dateTime = dateTime;
+    public void setDateTime() {
+        this.dateTime = createDate();
     }
 
     public String getTillName() {

@@ -40,14 +40,16 @@ public class WebController {
 
     @GetMapping("/")
     public String home() throws JsonProcessingException {
-        return objectMapper.writeValueAsString(tillService.getDb());
+        return objectMapper.writeValueAsString(tillService.findAll());
     }
 
     @PostMapping("/add")
     public ResponseEntity<String> addTill(@RequestBody Till till) throws JsonProcessingException {
-        Optional opt = Optional.of(till);
+        Optional<Till> opt = Optional.of(till);
         if (opt.isPresent()) {
-            tillService.save(till);
+            Till gotTill = opt.get();
+            gotTill.setDateTime();
+            tillService.save(gotTill);
             String json = objectMapper.writeValueAsString(till);
             return new ResponseEntity<>(json, HttpStatus.OK);
         } else {
