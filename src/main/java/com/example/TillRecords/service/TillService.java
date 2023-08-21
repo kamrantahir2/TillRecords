@@ -39,6 +39,11 @@ public class TillService {
         return tillRepository.findById(id);
     }
 
+    public Till delete(Till till) {
+        tillRepository.delete(till);
+        return till;
+    }
+
 
 
 }

@@ -65,4 +65,16 @@ public class WebController {
         }
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteTill(@PathVariable int id) throws JsonProcessingException {
+        Optional<Till> opt = tillService.findById(id);
+        if (opt.isPresent()) {
+            Till till = opt.get();
+            tillService.delete(till);
+            return new ResponseEntity<>(objectMapper.writeValueAsString(tillService.findAll()), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Till not found", HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
