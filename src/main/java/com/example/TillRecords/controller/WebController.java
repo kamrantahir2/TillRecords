@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -41,6 +38,17 @@ public class WebController {
     @GetMapping("/")
     public String home() throws JsonProcessingException {
         return objectMapper.writeValueAsString(tillService.findAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<String> findById(@PathVariable int id) throws JsonProcessingException {
+        Optional<Till> opt = tillService.findById(id);
+        if (opt.isPresent()) {
+            Till till = opt.get();
+            return new ResponseEntity<>(objectMapper.writeValueAsString(till), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Till not found", HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/add")
