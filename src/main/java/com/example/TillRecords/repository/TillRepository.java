@@ -4,4 +4,5 @@ import com.example.TillRecords.model.Till;
 import org.springframework.data.repository.CrudRepository;
 
 public interface TillRepository extends CrudRepository<Till, Integer> {
+    public Iterable<Till> findByOverUnderLessThan(double lessThan);
 }

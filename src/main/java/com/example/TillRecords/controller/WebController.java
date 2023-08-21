@@ -51,6 +51,11 @@ public class WebController {
         }
     }
 
+    @GetMapping("/overunderlessthan/{lessThan}")
+    public ResponseEntity<String> overUnderLessThan(@PathVariable double lessThan) throws JsonProcessingException {
+        return new ResponseEntity<>(objectMapper.writeValueAsString(tillService.findByOverUnderLessThan(lessThan)), HttpStatus.OK);
+    }
+
     @PostMapping("/add")
     public ResponseEntity<String> addTill(@RequestBody Till till) throws JsonProcessingException {
         Optional<Till> opt = Optional.of(till);
@@ -76,5 +81,7 @@ public class WebController {
             return new ResponseEntity<>("Till not found", HttpStatus.NOT_FOUND);
         }
     }
+
+
 
 }

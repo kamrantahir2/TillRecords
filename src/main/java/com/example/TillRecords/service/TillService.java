@@ -44,6 +44,10 @@ public class TillService {
         return till;
     }
 
+    public Iterable<Till> findByOverUnderLessThan(double lessThan) {
+        return tillRepository.findByOverUnderLessThan(lessThan);
+    }
+
 
 
 }
