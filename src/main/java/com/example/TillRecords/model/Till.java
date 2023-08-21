@@ -1,9 +1,6 @@
 package com.example.TillRecords.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.time.LocalDate;
@@ -11,16 +8,26 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 @Entity
+@Table(name="tills")
 public class Till {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name="date_time")
     private String dateTime;
+
+    @Column(name="till_name")
     private String tillName;
+
+    @Column(name="coins_and_five_pounds")
     private double coinsAndFivePounds;
+
+    @Column(name="remaining_notes")
     private double remainingNotes;
+
+    @Column(name="over_under")
     private double overUnder;
 
 //    Methods
